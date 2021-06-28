@@ -1,0 +1,61 @@
+h1,
+h2 {
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 15px;
+}
+a.main-action {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+}
+.search-pokemon {
+  max-width: 800px;
+  margin-bottom: 25px;
+  margin-top: 50px;
+}
+.search-pokemon select {
+  cursor: pointer;
+}
+.pokemon-list .pokemon {
+  position: relative;
+}
+.pokemon-list .pokemon .add-btn {
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+.pokemon-list .pokemon .add-btn p {
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0 0 3px 0;
+}
+
+.pokemon-list .pokemon .add-btn button {
+  margin: 2px 2px 0 2px;
+}
+.pokemon-list .pokemon:hover .add-btn {
+  display: block;
+}
+.pokemon-list .pokemon img {
+  max-width: 100%;
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+  border: 2px solid #88888847;
+  background-color: #8888881c;
+  cursor: pointer;
+}
+.pokemon-list .pokemon img:hover {
+  background-color: #88888803;
+  border: 2px solid #8888880f;
+}
+
+.exchange-list .exchange + .exchange {
+  border-top: 1px dashed #00000021;
+  padding-top: 20px;
+}
