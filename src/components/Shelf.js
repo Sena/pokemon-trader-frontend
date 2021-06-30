@@ -14,6 +14,7 @@ class Shelf extends Component {
       orderDir: "asc",
       queryText: "",
       pokemon: [],
+      baseExperience: [],
       pokemonSelected: {
         player1: [],
         player2: []
@@ -69,10 +70,29 @@ class Shelf extends Component {
     });
   }
 
+  async getBaseExperience(id) {
+    let tempBaseExperience = this.state.baseExperience;
+
+    if (tempBaseExperience.hasOwnProperty(id)) {
+      return tempBaseExperience[id];
+    }
+
+    let response = await axios.get(
+      "https://bxblue-poke-trader.herokuapp.com/pokemon/" + id
+    );
+    const pokemon = response.data;
+    tempBaseExperience[pokemon.id] = pokemon;
+
+    this.setState({
+      baseExperience: tempBaseExperience
+    });
+
+    return pokemon;
+  }
+
   selectPokemon(id, player) {
     const limit = 6;
     let tempPokemonSelected = this.state.pokemonSelected;
-
     let selectedPokemon =
       player === 1 ? tempPokemonSelected.player1 : tempPokemonSelected.player2;
 
@@ -80,20 +100,17 @@ class Shelf extends Component {
       return false;
     }
 
-    axios
-      .get("https://bxblue-poke-trader.herokuapp.com/pokemon/" + id)
-      .then((result) => {
-        const pokemon = result.data;
-        let tempPokemonSelected = this.state.pokemonSelected;
-        if (player === 1) {
-          tempPokemonSelected.player1.unshift(pokemon);
-        } else {
-          tempPokemonSelected.player2.unshift(pokemon);
-        }
-        this.setState({
-          pokemonSelected: tempPokemonSelected
-        });
+    this.getBaseExperience(id).then((pokemon) => {
+      if (player === 1) {
+        tempPokemonSelected.player1.unshift(pokemon);
+      } else {
+        tempPokemonSelected.player2.unshift(pokemon);
+      }
+
+      this.setState({
+        pokemonSelected: tempPokemonSelected
       });
+    });
   }
 
   exchangePokemon(player1Total, player2Total, textExchange) {
