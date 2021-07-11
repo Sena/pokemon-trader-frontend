@@ -1,23 +1,9 @@
-import axios from "axios";
 import { Component } from "react";
-import { Container, Row, Button, Col } from "react-bootstrap";
+import { Container, Row, Button, Col, Modal } from "react-bootstrap";
 
 class History extends Component {
-  constructor() {
-    super();
-    this.state = { exchange: [] };
-  }
-  componentDidMount() {
-    axios
-      .get("https://bxblue-poke-trader.herokuapp.com/exchange")
-      .then((result) => {
-        this.setState({
-          exchange: result.data.exchange
-        });
-      });
-  }
   render() {
-    const exchange = this.state.exchange.map((exchange) => {
+    const exchange = this.props.exchange.map((exchange) => {
       return (
         <Row className="exchange">
           <Col>
@@ -43,13 +29,27 @@ class History extends Component {
       );
     });
     return (
-      <Container className="history justfy-content text-center">
-        <h1>Poke trader - Histórico de trocas</h1>
-        <a href="/" className="main-action">
-          <Button variant="outline-primary">Trocas</Button>
-        </a>
-        <div className="exchange-list">{exchange}</div>
-      </Container>
+      <>
+        <Modal
+          show={this.props.show}
+          onHide={this.props.close}
+          dialogClassName="modal-90w history"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Histórico de trocas - Últimas 10 trocas</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Container className="justfy-content text-center">
+              <div className="exchange-list">{exchange}</div>
+            </Container>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.props.close}>
+              Fechar
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
     );
   }
 }
