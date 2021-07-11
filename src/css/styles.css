@@ -1,10 +1,21 @@
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 h1,
 h2 {
   font-family: sans-serif;
   text-align: center;
   margin-top: 15px;
 }
-a.main-action {
+.main-action {
   position: absolute;
   right: 1%;
   top: 1%;
@@ -54,8 +65,15 @@ a.main-action {
   background-color: #88888803;
   border: 2px solid #8888880f;
 }
-
+.modal-dialog.modal-90w {
+  width: 90%;
+  max-width: none;
+}
 .exchange-list .exchange + .exchange {
   border-top: 1px dashed #00000021;
   padding-top: 20px;
+}
+.history .close {
+  border: 0;
+  background: none;
 }
